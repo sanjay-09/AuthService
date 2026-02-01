@@ -1,0 +1,15 @@
+ALTER TABLE passenger
+ADD COLUMN email VARCHAR(255) NOT NULL,
+ADD CONSTRAINT uk_passenger_email UNIQUE (email);
+
+ALTER TABLE passenger
+ADD COLUMN password VARCHAR(255) NOT NULL;
+
+
+ALTER TABLE driver
+ADD COLUMN email VARCHAR(255) NOT NULL,
+ADD CONSTRAINT uk_driver_email UNIQUE (email);
+
+ALTER TABLE driver
+ADD COLUMN password VARCHAR(255) NOT NULL;
+
