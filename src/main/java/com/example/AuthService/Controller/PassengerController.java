@@ -6,11 +6,11 @@ import com.example.AuthService.Service.PassengerService;
 import com.example.AuthService.Utils.InternalServerError;
 import com.example.AuthService.Utils.PassengerNotFound;
 import com.example.AuthService.Utils.PassengerPasswordIncorrect;
+import com.example.AuthService.dtos.AuthResponseDTO;
 import com.example.AuthService.dtos.PassengerRequestDTO;
 import com.example.AuthService.dtos.PassengerResponseDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -66,15 +66,22 @@ public class PassengerController {
     }
 
     @GetMapping("/signin")
-    public ResponseEntity<?> signIn(@RequestBody PassengerRequestDTO passengerRequestDTO){
+    public ResponseEntity<?> signIn(@RequestBody PassengerRequestDTO passengerRequestDTO, HttpServletResponse response){
         Authentication authentication=this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(passengerRequestDTO.getEmail(),passengerRequestDTO.getPassword()));
         if(authentication.isAuthenticated()){
             Map<String,Object> map=new HashMap<>();
             map.put("email",passengerRequestDTO.getEmail());
             String token=this.jwtService.createToken(map,passengerRequestDTO.getEmail());
+            ResponseCookie cookie = ResponseCookie.from("JwtToken",token)
+                            .httpOnly(true)
+                            .secure(false)
+                            .path("/")
+                            .build();
+
+            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 
-            return ResponseEntity.status(HttpStatus.OK).body(token);
+            return ResponseEntity.status(HttpStatus.OK).body(AuthResponseDTO.builder().success(true).build());
         }
         else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("not req");
