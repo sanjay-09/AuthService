@@ -76,14 +76,14 @@ public class JWTService implements CommandLineRunner {
         //Formal flow
 
 
-        Map<String, Object> map=new HashMap<>();
-        map.put("email","sanjay.s01558@gmail.com");
-        map.put("name","Sanjay");
-
-        String token=this.createToken(map,"sanjay.s01558@gmail.com");
-        System.out.println(token);
-        //token comes from user
-        //i should extract the subject(which i have kept email in my case) and check it in the db
+//        Map<String, Object> map=new HashMap<>();
+//        map.put("email","sanjay.s01558@gmail.com");
+//        map.put("name","Sanjay");
+//
+//        String token=this.createToken(map,"sanjay.s01558@gmail.com");
+//        System.out.println(token);
+//        //token comes from user
+//        //i should extract the subject(which i have kept email in my case) and check it in the db
 
 
 

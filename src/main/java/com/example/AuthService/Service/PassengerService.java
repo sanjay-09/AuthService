@@ -6,5 +6,6 @@ import com.example.AuthService.dtos.PassengerResponseDTO;
 public interface PassengerService {
 
     PassengerResponseDTO createPassenger(PassengerRequestDTO passengerRequestDTO);
+    String getAccessToken(PassengerRequestDTO passengerRequestDTO) throws Exception;
 
 }
