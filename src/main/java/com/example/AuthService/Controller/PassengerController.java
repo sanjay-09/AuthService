@@ -9,7 +9,10 @@ import com.example.AuthService.Utils.PassengerPasswordIncorrect;
 import com.example.AuthService.dtos.AuthResponseDTO;
 import com.example.AuthService.dtos.PassengerRequestDTO;
 import com.example.AuthService.dtos.PassengerResponseDTO;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.coyote.Response;
 import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -78,6 +81,8 @@ public class PassengerController {
                             .path("/")
                             .build();
 
+
+            System.out.println(cookie.toString());
             response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 
@@ -89,6 +94,20 @@ public class PassengerController {
 
     }
 
+
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateUsers(HttpServletRequest httpServletRequest){
+        String token=null;
+
+        for(Cookie cookie: httpServletRequest.getCookies()){
+            if("JwtToken".equals(cookie.getName())){
+                token=cookie.getValue();
+                return ResponseEntity.status(HttpStatus.OK).body("token recieved"+token);
+            }
+        }
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("cookie does not have the token");
+    }
 
 
 }

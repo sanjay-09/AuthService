@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 
 @Service
-public class JWTService implements CommandLineRunner {
+public class JWTService{
 
     @Value("${jwt_expiry}")
     private int expiry;
@@ -59,7 +59,7 @@ public class JWTService implements CommandLineRunner {
 
     }
 
-    private String extractEmail(String token){
+    public String extractEmail(String token){
         return extractClaimInfo(token,(c)->c.getSubject());
     }
 
@@ -68,25 +68,13 @@ public class JWTService implements CommandLineRunner {
         return c.get(key);
     }
 
+    public boolean validate(String token,String sub){
 
-    @Override
-    public void run(String... args) throws Exception {
+        Claims c=this.getAllClaims(token);
 
-
-        //Formal flow
-
-
-//        Map<String, Object> map=new HashMap<>();
-//        map.put("email","sanjay.s01558@gmail.com");
-//        map.put("name","Sanjay");
-//
-//        String token=this.createToken(map,"sanjay.s01558@gmail.com");
-//        System.out.println(token);
-//        //token comes from user
-//        //i should extract the subject(which i have kept email in my case) and check it in the db
-
-
-
+        return c.getSubject().equals(sub)&&c.getExpiration().after(new Date());
 
     }
+
+
 }
