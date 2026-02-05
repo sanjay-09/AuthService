@@ -1,6 +1,6 @@
 package com.example.AuthService.Service;
 
-import com.example.AuthService.Model.Passenger;
+import com.example.UberEntites.Models.Passenger;
 import com.example.AuthService.Respository.PassengerRepository;
 import com.example.AuthService.Utils.PassengerNotFound;
 import com.example.AuthService.Utils.PassengerPasswordIncorrect;

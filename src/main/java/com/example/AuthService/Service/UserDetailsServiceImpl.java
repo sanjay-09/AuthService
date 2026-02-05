@@ -1,7 +1,7 @@
 package com.example.AuthService.Service;
 
 import com.example.AuthService.Helper.AuthPassengerDetail;
-import com.example.AuthService.Model.Passenger;
+import com.example.UberEntites.Models.Passenger;
 import com.example.AuthService.Respository.PassengerRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,6 +1,6 @@
 package com.example.AuthService;
 
-import com.example.AuthService.Model.Passenger;
+import com.example.UberEntites.Models.Passenger;
 import com.example.AuthService.Respository.PassengerRepository;
 import com.example.AuthService.Service.PassengerService;
 import com.example.AuthService.Service.PassengerServiceImpl;
@@ -47,7 +47,6 @@ public class PassengerServiceTest {
         passengerRequestDTO.setEmail("sanjay.s01558@gmail.com");
         passengerRequestDTO.setPassword("Sanjay@098");
         passengerRequestDTO.setName("Sanjay");
-
 
 
 
