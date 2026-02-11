@@ -42,7 +42,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt:0.12.5'
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 
-    implementation "com.example:UberEntites:0.0.2-SNAPSHOT"
+    implementation "com.example:UberEntites:0.0.4-SNAPSHOT"
 
 }
 
